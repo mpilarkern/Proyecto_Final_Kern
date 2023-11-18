@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<p>
+ <strong>Title:</strong> {{object.title}}
+</p>
+<p>
+ <strong>Subtitle:</strong> {{object.subtitle}}
+</p>
+<p>
+ <strong>Body:</strong> {{object.body}}
+</p>
+<p>
+ <strong>Author:</strong> {{object.author}}
+</p>
+<p>
+ <strong>Date:</strong> {{object.date}}
+</p>
+
+<br>
+<a href="{% url 'articles_list' %}">Go back to list</a>
+<a href="{% url 'edit_article' object.id %}">Edit</a>
+
+{% endblock contenido %}

@@ -14,7 +14,7 @@
     <form action="{% url 'search_articles' %}" method="post">
         {% csrf_token %}
         <input type="text" name="search">
-        <input type="submit" value="Search title">
+        <input type="submit" value="Search title or author">
       </form>
       <br>
     <table class='table'>
@@ -23,8 +23,11 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Date</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
-            {% for article in articles %}
+            {% for article in object_list %}
             <tr>
                 <td>{{ article.title }}</td>
                 {% if article.author == '' %}
@@ -33,6 +36,16 @@
                 <td>{{ article.author }}</td>
                 {% endif %}
                 <td>{{ article.date }}</td>
+                <td>
+                    <a href="{% url 'read_article' article.id %}">Read</a>
+                </td>
+                <td>
+                    <a href="{% url 'edit_article' article.id %}">Edit</a>
+                  </td>
+                  <td>
+                    <a href="{% url 'delete_article' article.id %}">
+                      <i class="bi bi-trash"></i>
+                    </a>
             </tr>
             {% endfor %}
         </tbody>
