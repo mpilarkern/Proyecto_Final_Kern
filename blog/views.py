@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Q
 from blog.models import Article
 from blog.forms import ArticleForm
 
@@ -37,3 +38,22 @@ def post_article(request):
         context={'formulario': formulario}
     )
     return http_response
+
+def search_articles(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["search"]
+        
+        articles = Article.objects.filter(
+            Q(title__icontains=busqueda)
+        )
+
+        contexto = {
+             "articles": articles,
+        }
+        http_response = render(
+            request=request,
+            template_name='blog/articles_list.html',
+            context=contexto,
+        )
+        return http_response

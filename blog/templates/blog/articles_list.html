@@ -8,12 +8,33 @@
 <h1>Reviews</h1>
     <h3>Start reading reviews</h3>
 
+    <a href="{% url 'articles_list' %}">Watch all</a>
     <a href="{% url 'new_article' %}">Post your review</a>
-    <ul>
-        {% for article in articles %}
-        <li>
-            { {article.title}, {article.date} }
-        </li>
-        {% endfor %}
-    </ul>
+    <br><br>
+    <form action="{% url 'search_articles' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="search">
+        <input type="submit" value="Search title">
+      </form>
+      <br>
+    <table class='table'>
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Date</th>
+            </tr>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.title }}</td>
+                {% if article.author == '' %}
+                <td>authorless</td>
+                {% else %}
+                <td>{{ article.author }}</td>
+                {% endif %}
+                <td>{{ article.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock contenido %}
