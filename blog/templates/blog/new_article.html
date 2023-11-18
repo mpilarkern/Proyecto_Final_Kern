@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Post article
+{% endblock titulo %}
+
+{% block contenido %}
+<form method="post">
+  {% csrf_token %}
+  {{ formulario.as_p }}
+  <input class="btn btn-success" type="submit" value="Submit article" />
+</form>
+<br>
+<a href="{% url 'articles_list' %}">Go back to list</a>
+{% endblock contenido %}

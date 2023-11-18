@@ -7,6 +7,8 @@
 {% block contenido %}
 <h1>Reviews</h1>
     <h3>Start reading reviews</h3>
+
+    <a href="{% url 'new_article' %}">Post your review</a>
     <ul>
         {% for article in articles %}
         <li>
