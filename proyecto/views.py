@@ -1,10 +1,10 @@
 from django.shortcuts import render
 
-def list_articles(request):
+def inicio(request):
     contexto = {}
     http_response = render(
         request=request,
-        template_name='blog/articles_list.html',
+        template_name='base.html',
         context=contexto,
     )
     return http_response
