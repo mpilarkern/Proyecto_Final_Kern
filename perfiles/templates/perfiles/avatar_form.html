@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Add Avatar</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h3>Upload your Avatar</h3>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Upload picture"/>
+</form>
+{% endblock contenido %}

@@ -7,7 +7,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
 
-from perfiles.forms import UserRegisterForm, UserUpdateForm
+from perfiles.forms import UserRegisterForm, UserUpdateForm, AvatarForm
 
 def signup_view(request):
    if request.method == "POST":
@@ -61,3 +61,20 @@ class MyProfileUpdateView(LoginRequiredMixin, UpdateView):
    def get_object(self, queryset=None):
        return self.request.user
 
+def add_avatar(request):
+    if request.method == "POST":
+        formulario = AvatarForm(request.POST, request.FILES) 
+
+        if formulario.is_valid():
+            avatar = formulario.save()
+            avatar.user = request.user
+            avatar.save()
+            url_exitosa = reverse('home')
+            return redirect(url_exitosa)
+    else:  
+        formulario = AvatarForm()
+    return render(
+        request=request,
+        template_name="perfiles/avatar_form.html",
+        context={'form': formulario},
+    )
