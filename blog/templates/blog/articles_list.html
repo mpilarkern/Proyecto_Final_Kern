@@ -40,12 +40,16 @@
                     <a href="{% url 'read_article' article.id %}">Read</a>
                 </td>
                 <td>
+                    {% if user == article.creator %}
                     <a href="{% url 'edit_article' article.id %}">Edit</a>
+                    {% endif %}
                   </td>
                   <td>
+                    {% if user == article.creator %}
                     <a href="{% url 'delete_article' article.id %}">
                       <i class="bi bi-trash"></i>
                     </a>
+                    {% endif %}
             </tr>
             {% endfor %}
         </tbody>

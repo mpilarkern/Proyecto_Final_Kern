@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.db.models import Q
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -37,10 +36,17 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
      fields = ('title', 'subtitle', 'body', 'author', 'date')
      success_url = reverse_lazy('articles_list')
 
+     def form_valid(self, form):
+        self.object = form.save()
+        self.object.creator = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
      model = Article
      fields = ('title', 'subtitle', 'body', 'author', 'date')
      success_url = reverse_lazy('articles_list')
+     
 
 class ArticleDetailView(DetailView):
     model = Article
