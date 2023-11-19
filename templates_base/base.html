@@ -28,10 +28,25 @@
                 <a class="navbar-brand" href="{% url 'articles_list' %}">Reviews</a>
                 <a class="navbar-brand" href="{% url 'about' %}" >About me</a>
                 {% if user.is_authenticated %}
-                <a class="btn btn-warning" href="{% url 'logout' %}">Log out</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div style="display: inline-flex;">
+                            <img src="{{user.avatar.imagen.url}}" style="max-width:40px;margin-right: 10px;">
+                            <span>{{ user.username }}</span>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}"><strong>Log out</strong></a>
+                        </li>
+                    </ul>
+                </div>
                 {% else %}
                 <a class="btn btn-primary" href="{% url 'login' %}">Log in</a>
-                <a class="btn btn-success" href="{% url 'sign_in' %}">Sign in</a>
+                <a class="btn btn-success" href="{% url 'sign_up' %}">Sign up</a>
                 {% endif %}
             </div>
         </nav>

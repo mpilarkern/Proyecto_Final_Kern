@@ -45,8 +45,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
      model = Article
      fields = ('title', 'subtitle', 'body', 'author', 'date')
-     success_url = reverse_lazy('articles_list')
-     
+     success_url = reverse_lazy('articles_list')     
 
 class ArticleDetailView(DetailView):
     model = Article

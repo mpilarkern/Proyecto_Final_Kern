@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Edit profile</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<p>Your username is <b>{{ object.username }}</b></p>
+
+<h3>Edit details:</h3>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Edit"/>
+</form>
+{% endblock contenido %}

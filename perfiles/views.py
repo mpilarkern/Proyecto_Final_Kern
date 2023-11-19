@@ -7,9 +7,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
 
-from perfiles.forms import UserRegisterForm
+from perfiles.forms import UserRegisterForm, UserUpdateForm
 
-def signin_view(request):
+def signup_view(request):
    if request.method == "POST":
        formulario = UserRegisterForm(request.POST)
 
@@ -21,7 +21,7 @@ def signin_view(request):
        formulario = UserRegisterForm()
    return render(
        request=request,
-       template_name='perfiles/sign_in.html',
+       template_name='perfiles/sign_up.html',
        context={'form': formulario},
    )
 
@@ -52,4 +52,12 @@ def login_view(request):
 
 class LogoutView(LogoutView):
    template_name = 'perfiles/logout.html'
+
+class MyProfileUpdateView(LoginRequiredMixin, UpdateView):
+   form_class = UserUpdateForm
+   success_url = reverse_lazy('home')
+   template_name = 'perfiles/profile_form.html'
+
+   def get_object(self, queryset=None):
+       return self.request.user
 
