@@ -12,8 +12,8 @@ def iniciar(request):
 def about(request):
     contexto = {}
     http_response = render(
-        request=request,
-        template_name='about.html',
-        context=contexto,
+        request,
+        'about.html',
+        contexto
     )
     return http_response

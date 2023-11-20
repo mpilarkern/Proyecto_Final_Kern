@@ -7,26 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from blog.models import Article
 
-
-def search_articles(request):
-    if request.method == "POST":
-        data = request.POST
-        busqueda = data["search"]
-        
-        articles = Article.objects.filter(
-            Q(title__icontains=busqueda) | Q(author__icontains=busqueda) 
-        )
-
-        contexto = {
-             "articles": articles,
-        }
-        http_response = render(
-            request=request,
-            template_name='blog/articles_list.html',
-            context=contexto,
-        )
-        return http_response
-
 class ArticleListView(ListView):
      model = Article
      template_name = 'blog/articles_list.html'
