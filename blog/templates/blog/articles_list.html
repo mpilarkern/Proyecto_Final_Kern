@@ -11,12 +11,12 @@
     <a href="{% url 'articles_list' %}">Watch all</a>
     <a href="{% url 'new_article' %}">Post your review</a>
     <br><br>
-    <form action="{% url 'search_articles' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="search">
-        <input type="submit" value="Search title or author">
-      </form>
-      <br>
+    
+    {% if object_list|length == 0 %}
+    <p>No reviews yet</p>
+
+    {% else %}
+
     <table class='table'>
         <tbody>
             <tr>
@@ -27,6 +27,7 @@
                 <th></th>
                 <th></th>
             </tr>
+
             {% for article in object_list %}
             <tr>
                 <td>{{ article.title }}</td>
@@ -54,4 +55,5 @@
             {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 {% endblock contenido %}
