@@ -13,7 +13,7 @@ class ArticleListView(ListView):
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
      model = Article
-     fields = ('title', 'subtitle', 'body', 'author', 'date')
+     fields = ('title', 'subtitle', 'body')
      success_url = reverse_lazy('articles_list')
 
      def form_valid(self, form):
@@ -24,7 +24,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
 
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
      model = Article
-     fields = ('title', 'subtitle', 'body', 'author', 'date')
+     fields = ('title', 'subtitle', 'body')
      success_url = reverse_lazy('articles_list')     
 
 class ArticleDetailView(DetailView):

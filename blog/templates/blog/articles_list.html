@@ -31,11 +31,7 @@
             {% for article in object_list %}
             <tr>
                 <td>{{ article.title }}</td>
-                {% if article.author == '' %}
-                <td>authorless</td>
-                {% else %}
-                <td>{{ article.author }}</td>
-                {% endif %}
+                <td>{{ article.creator }}</td>
                 <td>{{ article.date }}</td>
                 <td>
                     <a href="{% url 'read_article' article.id %}">Read</a>
