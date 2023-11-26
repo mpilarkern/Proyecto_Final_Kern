@@ -20,6 +20,7 @@
 
 <br>
 <a href="{% url 'articles_list' %}">Go back to list</a>
+{% if user == article.creator %}
 <a href="{% url 'edit_article' object.id %}">Edit</a>
-
+{% endif %}
 {% endblock contenido %}
